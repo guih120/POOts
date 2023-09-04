@@ -1,14 +1,22 @@
-import { cliente } from './cliente'
-import { bike } from './bike'
+import { App } from "./app";
+import { Bike } from "./bike";
+import { Rent } from "./rent";
+import { User } from "./user";
 
-const joao = new cliente('Joao da Silva', '111222333-45')
-const bicicleta = new bike('123-45', joao)
-const daniel = new cliente('Daniel Borges', '123123123-44')
+const bike = new Bike('mountain bike', 'mountain', 
+    123, 500, 100.5, 'desc', 5, [])
+const user = new User('Maria', 'maria@mail.com', '1234')
+const today = new Date()
+const twoDaysFromToday = new Date()
+twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
+const tomorrow = new Date()
+tomorrow.setDate(tomorrow.getDate() + 1)
+const sevenDaysFromToday = new Date()
+sevenDaysFromToday.setDate(sevenDaysFromToday.getDate() + 7)
+const rent1 = Rent.create([], bike, user, today, twoDaysFromToday)
+const user2 = new User('Maria Clara', 'maria@mail.com', '3123')
 
-bicicleta.aluguel(joao, bicicleta)
+const app = new App()
+app.registerUser(user)
 
-bicicleta.aluguel(daniel, bicicleta)
-
-console.log(bicicleta.dono)
-
-
+console.log(app.findUser('maria@mail.com'))
