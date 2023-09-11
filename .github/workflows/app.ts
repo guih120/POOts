@@ -50,8 +50,8 @@ export class App {
        
     }
 
-    returnBike(bikeId: string, userEmail: string) {
-      
+    returnBike(bikeId: string, userEmail: string): Numeber{
+      ## devolver bike mudar disponibilidade e retornar valor aluguel
     }
 
     listUsers(): void {
