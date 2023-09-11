@@ -5,9 +5,8 @@ export class Rent {
     private constructor(
         public bike: Bike,
         public user: User,
-        public dateFrom: Date,
-        public dateTo: Date,
-        public dateReturned?: Date
+        public date: Date,
+      
     ) {}
 
     static create(rents: Rent[], bike: Bike, user: User, 
