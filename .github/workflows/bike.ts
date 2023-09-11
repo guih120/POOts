@@ -8,6 +8,8 @@ export class Bike {
         public description: string,
         public ratings: number,
         public imageUrls: string[],
+        public hour: number,
+        public avaible: boolean,
         public id?: string
     ) {}
 }
