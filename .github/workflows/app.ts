@@ -41,34 +41,17 @@ export class App {
     }
 
     rentBike(bikeId: string, userEmail: string, startDate: Date, endDate: Date): void {
-        const bike = this.bikes.find(bike => bike.id === bikeId)
-        if (!bike) {
-            throw new Error('Bike not found.')
-        }
-        const user = this.findUser(userEmail)
-        if (!user) {
-            throw new Error('User not found.')
-        }
-        const bikeRents = this.rents.filter(rent =>
-            rent.bike.id === bikeId && !rent.dateReturned
-        )
-        const newRent = Rent.create(bikeRents, bike, user, startDate, endDate)
-        this.rents.push(newRent)
+        const user= this.user.find(user => user.email === useremail)
+        const bike= this.bikes.find(bike => bike.id === bikeId)
+        bike.avaible = false 
+        const today = new Date()
+        const rent = new rent()
+      
+       
     }
 
     returnBike(bikeId: string, userEmail: string) {
-        const today = new Date()
-        const rent = this.rents.find(rent =>
-            rent.bike.id === bikeId &&
-            rent.user.email === userEmail &&
-            rent.dateReturned === undefined &&
-            rent.dateFrom <= today
-        )
-        if (rent) {
-            rent.dateReturned = today
-            return
-        }
-        throw new Error('Rent not found.')
+      
     }
 
     listUsers(): void {
