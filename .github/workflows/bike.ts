@@ -10,6 +10,7 @@ export class Bike {
         public imageUrls: string[],
         public hour: number,
         public avaible: boolean,
+        public location: string,
         public id?: string
     ) {}
 }
