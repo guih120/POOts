@@ -92,6 +92,17 @@ export class App {
         }
         return false;
     }
+ 
+    updateLocation(bikeId: string, newLocation: string): void {
+        const bike = this.bikes.find(bike => bike.id === bikeId);
+
+        if (bike) {
+            bike.location = newLocation; // Atualiza a localização da bicicleta
+        } else {
+            throw new Error('Bike not found.');
+        }
+    }
+    
 }
 
 
