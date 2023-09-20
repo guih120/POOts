@@ -3,9 +3,9 @@ import { App } from "./app"
 import { Bike } from "./bike"
 import { User } from "./user"
 import { Location } from "./location"
-import { BikeNotFoundError } from "./errors/bike-not-found-error"
-import { UnavailableBikeError } from "./errors/unavailable-bike-error"
-import { UserNotFoundError } from "./errors/user-not-found-error"
+import { BikeNotFoundError } from "./erros/bike-not-found-error"
+import { UnavailableBikeError } from "./erros/unavailable-bike-error"
+import { UserNotFoundError } from "./erros/user-not-found-error"
 
 describe('App', () => {
     it('should correctly calculate the rent amount', async () => {
