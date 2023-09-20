@@ -3,8 +3,9 @@ import { App } from "./app"
 import { Bike } from "./bike"
 import { User } from "./user"
 import { Location } from "./location"
-import { BikeNotFoundError } from "./main/bike-not-found-error"
-import { UnavailableBikeError } from "./main/unavailable-bike-error"
+import { BikeNotFoundError } from "./errors/bike-not-found-error"
+import { UnavailableBikeError } from "./errors/unavailable-bike-error"
+import { UserNotFoundError } from "./errors/user-not-found-error"
 
 describe('App', () => {
     it('should correctly calculate the rent amount', async () => {
@@ -33,7 +34,7 @@ describe('App', () => {
         expect(bike.location.longitude).toEqual(newYork.longitude)
     })
 
-    it('should throw bike not found error when trying to move an unregistered bike', () => {
+    it('should throw an exception when trying to move an unregistered bike', () => {
         const app = new App()
         const newYork = new Location(40.753056, -73.983056)
         expect(() => {
@@ -41,7 +42,7 @@ describe('App', () => {
         }).toThrow(BikeNotFoundError)
     })
 
-    it('should correctly handle bike rent', async () => {
+    it('should correctly handle a bike rent', async () => {
         const app = new App()
         const user = new User('Jose', 'jose@mail.com', '1234')
         await app.registerUser(user)
@@ -51,10 +52,11 @@ describe('App', () => {
         app.rentBike(bike.id, user.email)
         expect(app.rents.length).toEqual(1)
         expect(app.rents[0].bike.id).toEqual(bike.id)
-        expect(app.rents[0].user.id).toEqual(user.id)
+        expect(app.rents[0].user.email).toEqual(user.email)
+        expect(bike.available).toBeFalsy()
     })
 
-    it('should throw unavaiable bike error when trying to rent unavailable bike', async () => {
+    it('should throw unavailable bike when trying to rent with an unavailable bike', async () => {
         const app = new App()
         const user = new User('Jose', 'jose@mail.com', '1234')
         await app.registerUser(user)
@@ -65,5 +67,12 @@ describe('App', () => {
         expect(() => {
             app.rentBike(bike.id, user.email)
         }).toThrow(UnavailableBikeError)
+    })
+
+    it('should throw user not found error when user is not found', () => {
+        const app = new App()
+        expect(() => {
+            app.findUser('fake@mail.com')
+        }).toThrow(UserNotFoundError)
     })
 })
