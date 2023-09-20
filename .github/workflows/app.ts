@@ -4,8 +4,9 @@ import { Rent } from "./rent";
 import { User } from "./user";
 import { Location } from "./location";
 import crypto from 'crypto'
-import { BikeNotFoundError } from "./main/bike-not-found-error";
-import { UnavailableBikeError } from "./main/unavailable-bike-error";
+import { BikeNotFoundError } from "./errors/bike-not-found-error";
+import { UnavailableBikeError } from "./errors/unavailable-bike-error";
+import { UserNotFoundError } from "./errors/user-not-found-error";
 
 export class App {
     users: User[] = []
@@ -15,7 +16,7 @@ export class App {
 
     findUser(email: string): User {
         const user = this.users.find(user => user.email === email)
-        if (!user) throw new Error('User not found.')
+        if (!user) throw new UserNotFoundError()
         return user
     }
 
