@@ -76,12 +76,6 @@ describe('App', () => {
         }).toThrow(UserNotFoundError)
     })
 
-     it('should throw user not found error when user is not found', () => {
-        const app = new App()
-        expect(() => {
-            app.findUser('fake@mail.com')
-        }).toThrow(UserNotFoundError)
-    })
 
     
 })
