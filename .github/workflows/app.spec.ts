@@ -77,5 +77,29 @@ describe('App', () => {
     })
 
 
+it('should not authenticate a user with invalid email', async () => {
+    const app = new App();
+    const userEmail = 'testuser@example.com';
+    const userPassword = 'password123';
+    const user = new User('Test User', userEmail, userPassword);
+    await app.registerUser(user);
+
+    const isAuthenticated = await app.authenticate('nonexistent@example.com', userPassword);
+    expect(isAuthenticated).toBe(false);
+});
+
+    it('should remove an existing user', async () => {
+    const app = new App();
+    const userEmail = 'testuser@example.com';
+    const userPassword = 'password123';
+    const user = new User('Test User', userEmail, userPassword);
+    await app.registerUser(user);
+
+    app.removeUser(userEmail);
+
+    // Ensure the user is no longer in the users array
+    const foundUser = app.users.find(u => u.email === userEmail);
+    expect(foundUser).toBeUndefined();
+});
     
 })
