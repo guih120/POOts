@@ -64,7 +64,7 @@ export class App {
     async returnBike(bikeId: string, userEmail: string): Promise<number> {
         const now = new Date()
         const rent = await this.rentRepo.findOpen(bikeId, userEmail)
-        if (!rent) throw new RentNotFoundError()
+        if (!rent) throw new Error('Rent not found.')
         rent.end = now
         await this.rentRepo.update(rent.id, rent)
         rent.bike.available = true
