@@ -127,10 +127,5 @@ describe('App', () => {
         await app.registerUser(user)
         await expect(app.findUser(user.email))
             .resolves.toEqual(user)
-        
     })
-    it('should correctly return rentNotFOUND') , async () =>{
-       const app = new App(userRepo, bikeRepo, rentRepo)
-       await expect(app.returnbike('usuario','gmail')).rejects.toThrow(RentNotFoundError)
-    }
 })
